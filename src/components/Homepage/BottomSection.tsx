@@ -1,12 +1,12 @@
 export default function BottomSection() {
   return (
-    <div className="flex-shrink-0 flex flex-col md:flex-row h-[30%]">
+    <div className="flex-shrink-0 flex flex-col desktop:flex-row h-[30%]">
       <img
-        className="w-full md:w-[30%] object-cover place-content-center"
+        className="w-full desktop:w-[30%] object-cover place-content-center"
         src="/images/image-about-dark.webp"
         alt=""
       />
-      <section className="w-full md:w-[40%] py-[3.75rem] px-[3rem] flex flex-col items-center justify-center">
+      <section className="w-full desktop:w-[40%] py-[3.75rem] px-[3rem] flex flex-col items-center justify-center">
         <div className="w-full max-w-[30.25rem] tracking-[-0.025rem]">
           <h2 className="text-[1.1rem] font-bold uppercase tracking-[0.3125rem] mb-2">
             About our furniture
@@ -22,7 +22,7 @@ export default function BottomSection() {
         </div>
       </section>
       <img
-        className="w-full md:w-[30%] object-cover place-content-center"
+        className="w-full desktop:w-[30%] object-cover place-content-center"
         src="/images/image-about-light.webp"
         alt=""
       />

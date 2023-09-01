@@ -7,6 +7,9 @@ export default {
         'dark-gray': '#444444',
         'light-gray': '#868686',
       },
+      screens: {
+        desktop: '1200px',
+      },
     },
   },
   plugins: [],
