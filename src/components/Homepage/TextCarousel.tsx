@@ -7,7 +7,7 @@ type TextCarouselProps = {
 
 export default function TextCarousel(props: TextCarouselProps) {
   return (
-    <div className="h-full w-full  py-14 px-8 desktop:px-[6rem] flex justify-center items-center">
+    <div className="h-full w-full py-14 px-8 desktop:px-[6rem] flex justify-center items-center">
       <div className="max-w-[25rem]">
         <h1 className="mb-4 text-[2.5rem] desktop:text-[3rem] font-[600] leading-[2.5rem] desktop:leading-[3rem] tracking-[-0.1rem] desktop:tracking-[-0.125rem]">
           {props.sections[props.currentSection].title}
@@ -15,7 +15,7 @@ export default function TextCarousel(props: TextCarouselProps) {
         <p className="mb-6 text-light-gray leading-[1.375rem]">
           {props.sections[props.currentSection].paragraph}
         </p>
-        <button className="group flex gap-4 items-center hover:text-light-gray hover:path-light-gray transition-colors duration-300">
+        <button className="group flex gap-4 items-center hover:text-light-gray hover:path-light-gray transition-colors duration-[0.5s]">
           <p className="text-[0.9375rem] tracking-[0.75rem] uppercase">
             Shop now
           </p>
