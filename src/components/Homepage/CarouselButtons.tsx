@@ -5,7 +5,7 @@ type CarouselButtonProps = {
 
 export default function CarouselButtons(props: CarouselButtonProps) {
   return (
-    <nav className="h-[3.5rem] desktop:h-[5rem] w-[7rem] desktop:w-[10rem] flex absolute desktop:left-0 desktop:bottom-0">
+    <nav className="h-[3.5rem] desktop:h-[5rem] w-[7rem] desktop:w-[10rem] flex absolute desktop:left-0 right-0 desktop:top-[calc(100%-5rem)] top-[-3.5rem]">
       <button
         onClick={() => props.previous()}
         className="h-[3.5rem] w-[3.5rem] desktop:h-[5rem] desktop:w-[5rem] flex justify-center items-center bg-black hover:bg-dark-gray transition-colors duration-300"

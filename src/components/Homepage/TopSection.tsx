@@ -43,11 +43,11 @@ export default function TopSection() {
   }, [currentSection]);
 
   return (
-    <section className="h-[70%] flex flex-col desktop:flex-row">
-      <div className="flex-shrink-0 w-full desktop:w-[calc(70%-10rem)]">
+    <section className="h-full desktop:h-[70%] flex flex-col desktop:flex-row">
+      <div className="max-h-[50%] desktop:max-h-full desktop:h-full w-full desktop:w-[calc(70%-10rem)]">
         <ImageCarousel sections={sections} currentSection={currentSection} />
       </div>
-      <div className="relative w-full desktop:w-[calc(30%+10rem)] flex-shrink-0">
+      <div className="relative desktop:h-full w-full desktop:w-[calc(30%+10rem)]">
         <TextCarousel sections={sections} currentSection={currentSection} />
         <CarouselButtons next={nextSection} previous={previousSection} />
       </div>
