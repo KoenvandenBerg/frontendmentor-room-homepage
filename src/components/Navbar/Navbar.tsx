@@ -63,6 +63,8 @@ export default function Navbar() {
     });
 
     window.addEventListener('keydown', (e) => {
+      if (!menuOpen) return;
+
       if (
         !currentFirstItemRef ||
         !currentLastItemRef ||
