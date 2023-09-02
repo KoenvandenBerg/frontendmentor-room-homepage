@@ -9,7 +9,7 @@ type ImageCarouselProps = {
 export default function ImageCarousel(props: ImageCarouselProps) {
   return (
     <AnimatePresence>
-      <div className="h-full w-full bg-dark-gray" aria-hidden>
+      <div className="h-full aspect-[16/10] w-full bg-dark-gray" aria-hidden>
         <motion.img
           key={props.sections[props.currentSection].image}
           src={props.sections[props.currentSection].image}
