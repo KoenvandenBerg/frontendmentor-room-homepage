@@ -13,8 +13,6 @@ export default function Navbar() {
     setMenuOpen(!menuOpen);
   };
 
-  const menuBgRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     window.addEventListener('resize', () => {
       if (window.innerWidth > breakpoint) {
@@ -43,8 +41,16 @@ export default function Navbar() {
     };
   }, []);
 
+  const menuBgRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const firstItemRef = useRef<HTMLAnchorElement>(null);
+  const lastItemRef = useRef<HTMLAnchorElement>(null);
+
   useEffect(() => {
     const currentMenuBgRef = menuBgRef.current;
+    const currentMenuButtonRef = menuButtonRef.current;
+    const currentFirstItemRef = firstItemRef.current;
+    const currentLastItemRef = lastItemRef.current;
 
     window.addEventListener('mousedown', (e) => {
       if (
@@ -56,15 +62,93 @@ export default function Navbar() {
       }
     });
 
-    return window.removeEventListener('mousedown', (e) => {
+    window.addEventListener('keydown', (e) => {
       if (
-        menuOpen &&
-        currentMenuBgRef != null &&
-        e.target == currentMenuBgRef
+        !currentFirstItemRef ||
+        !currentLastItemRef ||
+        !currentMenuButtonRef
       ) {
-        setMenuOpen(false);
+        return;
+      }
+
+      if (e.key === 'Tab' && !e.shiftKey) {
+        if (document.activeElement === currentMenuButtonRef) {
+          e.preventDefault();
+          currentFirstItemRef.focus();
+          return;
+        }
+
+        if (document.activeElement === currentLastItemRef) {
+          e.preventDefault();
+          currentMenuButtonRef.focus();
+          return;
+        }
+      }
+
+      if (e.shiftKey && e.key === 'Tab') {
+        if (document.activeElement === currentMenuButtonRef) {
+          e.preventDefault();
+          currentLastItemRef.focus();
+          return;
+        }
+
+        if (document.activeElement === currentFirstItemRef) {
+          e.preventDefault();
+          currentMenuButtonRef.focus();
+          return;
+        }
       }
     });
+
+    return () => {
+      window.removeEventListener('mousedown', (e) => {
+        if (
+          menuOpen &&
+          currentMenuBgRef != null &&
+          e.target == currentMenuBgRef
+        ) {
+          setMenuOpen(false);
+        }
+      });
+
+      window.removeEventListener('keydown', (e) => {
+        if (
+          !currentFirstItemRef ||
+          !currentLastItemRef ||
+          !currentMenuButtonRef
+        ) {
+          return;
+        }
+
+        if (e.key === 'Tab' && !e.shiftKey) {
+          if (document.activeElement === currentMenuButtonRef) {
+            e.preventDefault();
+            currentFirstItemRef.focus();
+            return;
+          }
+
+          if (document.activeElement === currentLastItemRef) {
+            e.preventDefault();
+            currentMenuButtonRef.focus();
+            return;
+          }
+        }
+
+        if (e.shiftKey && e.key === 'Tab') {
+          if (document.activeElement === currentMenuButtonRef) {
+            e.preventDefault();
+            currentLastItemRef.focus();
+            return;
+          }
+
+          if (document.activeElement === currentFirstItemRef) {
+            e.preventDefault();
+            currentMenuButtonRef.focus();
+            return;
+          }
+        }
+      });
+    };
   }, [menuOpen]);
 
   return (
@@ -93,6 +177,7 @@ export default function Navbar() {
       </nav>
       <nav className="desktop:hidden w-full absolute px-6 pt-12 z-10 flex justify-center items-center">
         <button
+          ref={menuButtonRef}
           onClick={() => toggleMenu()}
           className="desktop:hidden absolute left-6 bottom-1 z-30"
         >
@@ -136,9 +221,16 @@ export default function Navbar() {
                   className="absolute left-0 top-0 h-[7rem] w-full bg-white flex justify-center items-center"
                 >
                   <ul className="flex gap-8 text-black">
-                    {navItems.map((item) => (
+                    {navItems.map((item, index) => (
                       <li key={item} className="relative w-full z-10">
                         <a
+                          ref={
+                            index === 0
+                              ? firstItemRef
+                              : index === navItems.length - 1
+                              ? lastItemRef
+                              : null
+                          }
                           href="#"
                           onClick={() => toggleMenu()}
                           className="font-[500] hover:before:opacity-100 before:opacity-0 before:w-[50%] before:h-[2px] before:bg-black before:absolute before:bottom-[-0.25rem] before:left-[25%] before:transition-opacity before:duration-[0.3s]"
