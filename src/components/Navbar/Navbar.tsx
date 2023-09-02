@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const navItems = ['home', 'shop', 'about', 'contact'];
+
+const breakpoint = 1200;
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,6 +12,61 @@ export default function Navbar() {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const menuBgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > breakpoint) {
+        setMenuOpen(false);
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+      }
+    });
+
+    return () => {
+      window.removeEventListener('resize', () => {
+        if (window.innerWidth > breakpoint) {
+          setMenuOpen(false);
+        }
+      });
+
+      window.removeEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          setMenuOpen(false);
+        }
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    const currentMenuBgRef = menuBgRef.current;
+
+    window.addEventListener('mousedown', (e) => {
+      if (
+        menuOpen &&
+        currentMenuBgRef != null &&
+        e.target == currentMenuBgRef
+      ) {
+        setMenuOpen(false);
+      }
+    });
+
+    return window.removeEventListener('mousedown', (e) => {
+      if (
+        menuOpen &&
+        currentMenuBgRef != null &&
+        e.target == currentMenuBgRef
+      ) {
+        setMenuOpen(false);
+      }
+    });
+  }, [menuOpen]);
+
   return (
     <>
       <nav className="hidden desktop:flex absolute pt-[3rem] px-[4rem] z-10 gap-[3.5rem] items-center text-white font-[600]">
@@ -64,6 +121,7 @@ export default function Navbar() {
           ? createPortal(
               <>
                 <motion.div
+                  ref={menuBgRef}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 0.75 }}
                   exit={{ opacity: 0 }}
@@ -77,12 +135,13 @@ export default function Navbar() {
                   transition={{ type: 'tween', duration: 0.5 }}
                   className="absolute left-0 top-0 h-[7rem] w-full bg-white flex justify-center items-center"
                 >
-                  <ul className="flex gap-8">
+                  <ul className="flex gap-8 text-black">
                     {navItems.map((item) => (
-                      <li key={item} className="relative w-full">
+                      <li key={item} className="relative w-full z-10">
                         <a
                           href="#"
-                          className="hover:before:opacity-100 before:opacity-0 before:w-[50%] before:h-[2px] before:bg-white before:absolute before:bottom-[-0.25rem] before:left-[25%] before:transition-opacity before:duration-[0.3s]"
+                          onClick={() => toggleMenu()}
+                          className="font-[500] hover:before:opacity-100 before:opacity-0 before:w-[50%] before:h-[2px] before:bg-black before:absolute before:bottom-[-0.25rem] before:left-[25%] before:transition-opacity before:duration-[0.3s]"
                         >
                           {item}
                         </a>
