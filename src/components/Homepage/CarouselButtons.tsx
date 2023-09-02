@@ -5,7 +5,11 @@ type CarouselButtonProps = {
 
 export default function CarouselButtons(props: CarouselButtonProps) {
   return (
-    <nav className="h-[3.5rem] desktop:h-[5rem] w-[7rem] desktop:w-[10rem] flex absolute desktop:left-0 right-0 desktop:top-[calc(100%-5rem)] top-[-3.5rem]">
+    <div
+      role="group"
+      aria-label="Carousel controls"
+      className="h-[3.5rem] desktop:h-[5rem] w-[7rem] desktop:w-[10rem] flex absolute desktop:left-0 right-0 desktop:top-[calc(100%-5rem)] top-[-3.5rem]"
+    >
       <button
         onClick={() => props.previous()}
         aria-label="Show the next item."
@@ -44,6 +48,6 @@ export default function CarouselButtons(props: CarouselButtonProps) {
           />
         </svg>
       </button>
-    </nav>
+    </div>
   );
 }
