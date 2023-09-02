@@ -8,7 +8,7 @@ export default {
         'light-gray': '#868686',
       },
       screens: {
-        desktop: '1200px',
+        desktop: '1000px',
       },
     },
   },

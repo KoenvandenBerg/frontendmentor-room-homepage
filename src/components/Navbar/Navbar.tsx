@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 
 const navItems = ['home', 'shop', 'about', 'contact'];
 
-const breakpoint = 1200;
+const breakpoint = 1000;
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
