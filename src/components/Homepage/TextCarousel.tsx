@@ -16,9 +16,9 @@ export default function TextCarousel(props: TextCarouselProps) {
           {props.sections[props.currentSection].paragraph}
         </p>
         <button className="group flex gap-4 items-center hover:text-light-gray hover:path-light-gray transition-colors duration-[0.5s]">
-          <p className="text-[0.9375rem] tracking-[0.75rem] uppercase">
+          <span className="text-[0.9375rem] tracking-[0.75rem] uppercase">
             Shop now
-          </p>
+          </span>
           <svg
             width="50"
             height="12"
