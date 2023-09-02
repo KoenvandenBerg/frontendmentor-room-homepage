@@ -177,7 +177,7 @@ export default function Navbar() {
           ))}
         </ul>
       </nav>
-      <nav className="desktop:hidden w-full absolute px-6 pt-12 z-10 flex justify-center items-center">
+      <nav className="desktop:hidden w-full absolute px-6 pt-8 z-10 flex justify-center items-center">
         <button
           ref={menuButtonRef}
           onClick={() => toggleMenu()}
