@@ -16,6 +16,7 @@ export default function ImageCarousel(props: ImageCarouselProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2 }}
+          alt=""
           className="w-full h-full object-cover place-content-center"
         />
       </div>
