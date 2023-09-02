@@ -220,7 +220,7 @@ export default function Navbar() {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -100, opacity: 0 }}
                   transition={{ type: 'tween', duration: 0.5 }}
-                  className="absolute left-0 top-0 h-[15.5rem] w-full bg-white flex justify-center items-center"
+                  className="absolute left-0 top-0 h-[13.75rem] w-full bg-white flex justify-center items-center"
                 >
                   <ul className="flex flex-col gap-5 relative text-black text-center">
                     {navItems.map((item, index) => (
